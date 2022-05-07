@@ -15,16 +15,22 @@ passport.use(
   )
 );
 
+//Save the session to the cookie
 passport.serializeUser((user, done) => {
+  console.log("line no 20====>",user);
   done(null, user);
 });
+
+
+//Read the session from the cookie and put it into req.user
 passport.deserializeUser((obj, done) => {
+  console.log("line no 27",obj)
   done(null, obj);
 });
 
 const cookieSessionConfig = cookieSession({
   name: "session",
-  maxAge: 1000 * 60 * 60 * 24,
+  maxAge: 1000 * 60 * 5,
   keys: [process.env.SESSION_KEY_ONE, process.env.SESSION_KEY_TWO],
 });
 

@@ -2,8 +2,12 @@ const express = require("express");
 const googleRouter = express.Router();
 const { passport } = require("../../middleware/passport.middleware");
 const { baseUrl } = require("../../utils/constant");
+
 googleRouter.get("/login", (req, res, next) => {
-  res.send("logged In");
+  if (!req.user) {
+    return res.status(401).json({ message: "You must log In!!" });
+  }
+  return res.send("logged In");
 });
 
 googleRouter.get(
