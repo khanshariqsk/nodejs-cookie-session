@@ -18,20 +18,20 @@ passport.use(
 
 //Save the session to the cookie
 passport.serializeUser((user, done) => {
-  console.log("line no 20====>",user);
-  done(null, user);
+  console.log("line no 20====>",user.id);
+  done(null, user.id);
 });
 
 
 //Read the session from the cookie and put it into req.user
-passport.deserializeUser((obj, done) => {
-  console.log("line no 27",obj)
-  done(null, obj);
+passport.deserializeUser((id, done) => {
+  console.log("line no 27",id)
+  done(null, id);
 });
 
 const cookieSessionConfig = cookieSession({
   name: "session",
-  maxAge:toMilliSecond(1,"min"),
+  maxAge:toMilliSecond(10,"min"),
   keys: [process.env.SESSION_KEY_ONE, process.env.SESSION_KEY_TWO],
 });
 
