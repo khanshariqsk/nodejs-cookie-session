@@ -1,6 +1,7 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const { toMilliSecond } = require("../utils/helperFunction");
 passport.use(
   new GoogleStrategy(
     {
@@ -30,7 +31,7 @@ passport.deserializeUser((obj, done) => {
 
 const cookieSessionConfig = cookieSession({
   name: "session",
-  maxAge: 1000 * 60 * 5,
+  maxAge:toMilliSecond(1,"min"),
   keys: [process.env.SESSION_KEY_ONE, process.env.SESSION_KEY_TWO],
 });
 
